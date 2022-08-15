@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Uri Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Uri</ion-label>
+      <ion-input [(ngModel)]="uri" placeholder="https://"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>
+</ion-content>

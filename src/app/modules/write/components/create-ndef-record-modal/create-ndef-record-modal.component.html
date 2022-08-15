@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>General</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="createNdefEmptyRecord()">
+      <ion-label>
+        <h2>Empty</h2>
+        <p>Add an empty record</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCreateNdefTextRecordModal()">
+      <ion-label>
+        <h2>Text</h2>
+        <p>Add a text record</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCreateNdefUriRecordModal()">
+      <ion-label>
+        <h2>URI</h2>
+        <p>Add an uri record</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCreateNdefAbsoluteUriRecordModal()">
+      <ion-label>
+        <h2>Absolute URI</h2>
+        <p>Add an absolute uri record</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCreateNdefMimeMediaRecordModal()">
+      <ion-label>
+        <h2>MIME Type</h2>
+        <p>Add a mime type record</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCreateNdefExternalRecordModal()">
+      <ion-label>
+        <h2>External Type</h2>
+        <p>Add a external type record</p>
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
+      <ion-label>Custom</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="openCreateNdefAndroidApplicationRecordModal()">
+      <ion-label>
+        <h2>Android Application</h2>
+        <p>Add an Android Application record to trigger apps to open</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

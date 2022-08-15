@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Write</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="records$ | async as records">
+    <ion-item-sliding *ngFor="let record of records; let index = index">
+      <ion-item>
+        <ion-label position="stacked">{{ record | recordLabel }}</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="record | recordPayload"
+        ></ion-input>
+      </ion-item>
+      <ion-item-options side="end" (ionSwipe)="removeNdefRecordAtIndex(index)">
+        <ion-item-option color="danger">Remove</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-button expand="block" (click)="openCreateNdefRecordModal()"
+    >Add Record</ion-button
+  >
+  <ion-button expand="block" color="warning" (click)="startWriterSession()"
+    >Write to Tag</ion-button
+  >
+</ion-content>

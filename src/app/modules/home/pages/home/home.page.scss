@@ -1,0 +1,13 @@
+ion-button.app-store {
+  --background: #d6d6d6;
+  --color: #000;
+}
+
+ion-button.play-store {
+  --background: #fff;
+  --color: #000;
+}
+
+ion-button > fa-icon {
+  padding-right: 8px;
+}

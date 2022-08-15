@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add External Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Domain</ion-label>
+      <ion-input [(ngModel)]="domain" placeholder="android.com"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Type</ion-label>
+      <ion-input [(ngModel)]="type" placeholder="pkg"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Payload</ion-label>
+      <ion-input
+        [(ngModel)]="payload"
+        placeholder="com.example.myapp"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>
+</ion-content>

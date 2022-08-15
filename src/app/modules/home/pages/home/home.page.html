@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>NFC Toolbox</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="menu-trigger-button">
+        <ion-icon
+          slot="icon-only"
+          ios="ellipsis-horizontal"
+          md="ellipsis-vertical"
+        ></ion-icon>
+      </ion-button>
+      <ion-popover trigger="menu-trigger-button">
+        <ng-template>
+          <ion-content>
+            <ion-list>
+              <ion-item
+                button
+                (click)="openLegalPageInNewTab()"
+                [lines]="'none'"
+                >Legal</ion-item
+              >
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Navigation</ion-label>
+    </ion-list-header>
+    <ion-button expand="block" color="primary" (click)="navigateToReadPage()"
+      >Read</ion-button
+    >
+    <ion-button expand="block" color="primary" (click)="navigateToWritePage()"
+      >Write</ion-button
+    >
+    <ng-container *ngIf="!isNativePlatform">
+      <ion-list-header>
+        <ion-label>Demo Apps</ion-label>
+      </ion-list-header>
+      <ion-button
+        expand="block"
+        class="app-store"
+        (click)="openAppStoreInNewTab()"
+        ><fa-icon [icon]="['fab', 'apple']"></fa-icon>App Store</ion-button
+      >
+      <ion-button
+        expand="block"
+        class="play-store"
+        (click)="openPlayStoreInNewTab()"
+        ><fa-icon [icon]="['fab', 'google-play']"></fa-icon> Play
+        Store</ion-button
+      >
+    </ng-container>
+  </ion-list>
+</ion-content>

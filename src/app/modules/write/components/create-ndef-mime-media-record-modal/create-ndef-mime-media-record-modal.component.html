@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Mime Media Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Mime Type</ion-label>
+      <ion-input
+        [(ngModel)]="mimeType"
+        placeholder="application/json"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Mime Data</ion-label>
+      <ion-input [(ngModel)]="mimeData" placeholder='{ "test": 1 }'></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>
+</ion-content>

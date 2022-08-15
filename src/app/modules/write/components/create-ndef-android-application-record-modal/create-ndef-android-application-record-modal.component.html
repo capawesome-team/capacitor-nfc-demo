@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Android Application Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Package Name</ion-label>
+      <ion-input
+        [(ngModel)]="payload"
+        placeholder="com.example.myapp"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Text Record</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Text</ion-label>
+      <ion-input [(ngModel)]="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Language</ion-label>
+      <ion-input
+        [(ngModel)]="language"
+        placeholder="ISO language code"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>
+</ion-content>

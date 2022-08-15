@@ -1,0 +1,209 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Read</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="scannedTag$ | async as tag; else placeholder">
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Details</ion-label>
+      </ion-item-divider>
+      <!-- <ion-item lines="inset">
+        <ion-label position="stacked">Tag Manufacturer</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag | tagManufacturer"
+        ></ion-input>
+      </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="stacked">Tag Name</ion-label>
+        <ion-input [readonly]="true" [value]="tag | tagName"></ion-input>
+      </ion-item> -->
+      <ion-item *ngIf="tag.id !== undefined && tag.id.length > 0" lines="inset">
+        <ion-label position="stacked">Tag Identifier</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.id | bytesToHex:'':':'"
+        ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="tag.type !== undefined" lines="inset">
+        <ion-label position="stacked">Tag Type</ion-label>
+        <ion-input [readonly]="true" [value]="tag.type"></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.techTypes !== undefined && tag.techTypes.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Technologies</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.techTypes.join(', ')"
+        ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="tag.isWritable !== undefined" lines="inset">
+        <ion-label position="stacked">Writable</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]=" tag.isWritable | booleanToText"
+        ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="tag.canMakeReadOnly !== undefined" lines="inset">
+        <ion-label position="stacked">Write protectable</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.canMakeReadOnly | booleanToText"
+        ></ion-input>
+      </ion-item>
+      <!-- <ion-item lines="inset">
+        <ion-label position="stacked">Password protected</ion-label>
+        <ion-input [readonly]="true" [value]=""></ion-input>
+      </ion-item> -->
+      <ion-item *ngIf="tag.maxSize !== undefined" lines="inset">
+        <ion-label position="stacked">Size</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.maxSize + ' Bytes'"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.atqa !== undefined && tag.atqa.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">ATQA</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.atqa | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.applicationData !== undefined && tag.applicationData.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Application Data</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.applicationData | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.barcode !== undefined && tag.barcode.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Barcode</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.barcode | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.dsfId !== undefined && tag.dsfId.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">DSF ID</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.dsfId | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.hiLayerResponse !== undefined && tag.hiLayerResponse.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Higher Layer Response</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.hiLayerResponse | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.historicalBytes !== undefined && tag.historicalBytes.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Historical Bytes</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.historicalBytes | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.manufacturer !== undefined && tag.manufacturer.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Manufacturer</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.manufacturer | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.protocolInfo !== undefined && tag.protocolInfo.length>0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Protocol Info</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.protocolInfo | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.responseFlags !== undefined && tag.responseFlags.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Response Flag</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.responseFlags | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.responseFlags !== undefined && tag.responseFlags.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">Response Flag</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.responseFlags | bytesToHex"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.sak !== undefined && tag.sak.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">SAK</ion-label>
+        <ion-input [readonly]="true" [value]="tag.sak | bytesToHex"></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="tag.systemCode !== undefined && tag.systemCode.length > 0"
+        lines="inset"
+      >
+        <ion-label position="stacked">System Code</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.systemCode | bytesToHex"
+        ></ion-input>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group *ngIf="tag.message">
+      <ion-item-divider>
+        <ion-label>Records</ion-label>
+      </ion-item-divider>
+      <ion-item lines="inset" *ngFor="let record of tag.message.records">
+        <ion-label position="stacked">{{ record | recordLabel }}</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="record | recordPayload"
+        ></ion-input>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+  <ng-template #placeholder>
+    <div id="content-placeholder">
+      <ion-icon name="radio-outline"></ion-icon>
+    </div>
+  </ng-template>
+</ion-content>
