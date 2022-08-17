@@ -1,5 +1,13 @@
 # capacitor-nfc-demo
 
+⚡️ Simple Ionic Angular app to demonstrate the use of the [Capacitor NFC plugin](https://github.com/capawesome-team/capacitor-nfc).
+
+## Plugins
+
+The following plugins are included:
+
+- [capawesome-team/capacitor-nfc](https://github.com/capawesome-team/capacitor-nfc)
+
 ## Development 💻
 
 ### Prerequisites
