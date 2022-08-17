@@ -24,11 +24,6 @@
 	<true/>
 	<key>NFCReaderUsageDescription</key>
 	<string>The app enables the reading and writing of various NFC tags.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
