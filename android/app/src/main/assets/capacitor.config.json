@@ -1,6 +1,6 @@
 {
-  "appId": "dev.robingenz.capacitorjs.nfc.demo",
-  "appName": "capacitor-nfc-demo",
-  "webDir": "www",
-  "bundledWebRuntime": false
+	"appId": "dev.robingenz.capacitorjs.nfc.demo",
+	"appName": "capacitor-nfc-demo",
+	"webDir": "www",
+	"bundledWebRuntime": false
 }
