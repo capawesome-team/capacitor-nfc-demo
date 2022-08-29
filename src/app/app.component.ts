@@ -16,8 +16,10 @@ export class AppComponent implements OnInit {
   }
 
   private setStatusBarStyle(): void {
-    if (this.platformService.isNativePlatform()) {
+    if (this.platformService.isIos()) {
       StatusBar.setStyle({ style: Style.Light });
+    } else if (this.platformService.isAndroid()) {
+      StatusBar.setStyle({ style: Style.Dark });
     }
   }
 }
