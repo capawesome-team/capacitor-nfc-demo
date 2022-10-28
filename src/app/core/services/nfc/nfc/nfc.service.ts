@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { NdefMessage, NfcTag } from '@capawesome-team/capacitor-nfc';
+import {
+  NdefMessage,
+  NfcTag,
+  NfcTagTechType,
+} from '@capawesome-team/capacitor-nfc';
 import { Observable } from 'rxjs';
 import { CapacitorNfcService } from '../../capacitor';
 import { DialogService } from '../../dialog/dialog.service';
@@ -55,6 +59,25 @@ export class NfcService {
     await this.capacitorNfcService.write({
       message,
     });
+  }
+
+  public async transceive(
+    techType: NfcTagTechType,
+    data: number[],
+  ): Promise<number[]> {
+    const isSupported = await this.isSupported();
+    if (!isSupported) {
+      throw this.createNotSupportedError();
+    }
+    const isEnabled = await this.isEnabled();
+    if (!isEnabled) {
+      throw this.createNotEnabledError();
+    }
+    const { response } = await this.capacitorNfcService.transceive({
+      techType,
+      data,
+    });
+    return response;
   }
 
   public isSupported(): Promise<boolean> {

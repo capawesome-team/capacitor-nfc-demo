@@ -38,6 +38,13 @@
     <ion-button expand="block" color="primary" (click)="navigateToWritePage()"
       >Write</ion-button
     >
+    <ion-button
+      *ngIf="isNativePlatform"
+      expand="block"
+      color="primary"
+      (click)="navigateToTransceivePage()"
+      >Transceive</ion-button
+    >
     <ng-container *ngIf="!isNativePlatform">
       <ion-list-header>
         <ion-label>Demo Apps</ion-label>

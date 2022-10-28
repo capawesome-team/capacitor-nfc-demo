@@ -24,6 +24,14 @@ export class HomePage {
     await this.routerService.navigateToWritePage();
   }
 
+  public async navigateToTransceivePage(): Promise<void> {
+    const confirmed = await this.showTransceivePageWarning();
+    if (!confirmed) {
+      return;
+    }
+    await this.routerService.navigateToTransceivePage();
+  }
+
   public openAppStoreInNewTab(): void {
     this.dialogService.showAlert({
       header: 'Info',
@@ -46,5 +54,33 @@ export class HomePage {
 
   public openLegalPageInNewTab(): void {
     this.routerService.openLegalPageInNewTab();
+  }
+
+  public showTransceivePageWarning(): Promise<boolean> {
+    return new Promise(resolve => {
+      this.dialogService.showAlert({
+        header: 'Warning',
+        message: [
+          'This function is experimental and can damage your tag forever!',
+          'Please use this function only for testing.',
+          'WE TAKE NO RESPONSIBILITY AND LIABILITY FOR ANY DAMAGE CAUSED.',
+        ].join(' '),
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              resolve(false);
+            },
+          },
+          {
+            text: 'I got this!',
+            handler: () => {
+              resolve(true);
+            },
+          },
+        ],
+      });
+    });
   }
 }
