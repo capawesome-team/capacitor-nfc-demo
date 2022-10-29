@@ -6,7 +6,6 @@ import {
 } from '@capawesome-team/capacitor-nfc';
 import { Observable } from 'rxjs';
 import { CapacitorNfcService } from '../../capacitor';
-import { DialogService } from '../../dialog/dialog.service';
 import { PlatformService } from '../../platform/platform.service';
 
 @Injectable({
@@ -15,7 +14,6 @@ import { PlatformService } from '../../platform/platform.service';
 export class NfcService {
   constructor(
     private readonly capacitorNfcService: CapacitorNfcService,
-    private readonly dialogService: DialogService,
     private readonly platformService: PlatformService,
   ) {}
 
@@ -59,6 +57,30 @@ export class NfcService {
     await this.capacitorNfcService.write({
       message,
     });
+  }
+
+  public async erase(): Promise<void> {
+    const isSupported = await this.isSupported();
+    if (!isSupported) {
+      throw this.createNotSupportedError();
+    }
+    const isEnabled = await this.isEnabled();
+    if (!isEnabled) {
+      throw this.createNotEnabledError();
+    }
+    await this.capacitorNfcService.erase();
+  }
+
+  public async format(): Promise<void> {
+    const isSupported = await this.isSupported();
+    if (!isSupported) {
+      throw this.createNotSupportedError();
+    }
+    const isEnabled = await this.isEnabled();
+    if (!isEnabled) {
+      throw this.createNotEnabledError();
+    }
+    await this.capacitorNfcService.format();
   }
 
   public async transceive(

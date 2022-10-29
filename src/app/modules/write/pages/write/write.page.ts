@@ -68,7 +68,7 @@ export class WritePage {
         1,
       );
     }
-    await this.showWriterAlert();
+    await this.showScanSessionAlert({ header: 'Write' });
     this.nfcService.scannedTag$
       .pipe(takeUntil(this.cancel$), take(1), untilDestroyed(this))
       .subscribe(async () => {
@@ -79,12 +79,68 @@ export class WritePage {
       });
   }
 
-  private async showWriterAlert(): Promise<void> {
+  public async erase(): Promise<void> {
+    try {
+      await this.nfcService.startScanSession();
+    } catch (error) {
+      throw error;
+    } finally {
+      /**
+       * **Workaround**
+       *
+       * The error dialog is not consistently presented and you had to interact
+       * with the page first (e.g. by random click) for the alert to show up.
+       */
+      this.timeoutService.timeout(
+        () => this.changeDetectorRef.detectChanges(),
+        1,
+      );
+    }
+    await this.showScanSessionAlert({ header: 'Erase' });
+    this.nfcService.scannedTag$
+      .pipe(takeUntil(this.cancel$), take(1), untilDestroyed(this))
+      .subscribe(async () => {
+        await this.nfcService.erase();
+        this.activeWriterAlert?.dismiss();
+        await this.nfcService.stopScanSession();
+      });
+  }
+
+  public async format(): Promise<void> {
+    try {
+      await this.nfcService.startScanSession();
+    } catch (error) {
+      throw error;
+    } finally {
+      /**
+       * **Workaround**
+       *
+       * The error dialog is not consistently presented and you had to interact
+       * with the page first (e.g. by random click) for the alert to show up.
+       */
+      this.timeoutService.timeout(
+        () => this.changeDetectorRef.detectChanges(),
+        1,
+      );
+    }
+    await this.showScanSessionAlert({ header: 'Format' });
+    this.nfcService.scannedTag$
+      .pipe(takeUntil(this.cancel$), take(1), untilDestroyed(this))
+      .subscribe(async () => {
+        await this.nfcService.format();
+        this.activeWriterAlert?.dismiss();
+        await this.nfcService.stopScanSession();
+      });
+  }
+
+  private async showScanSessionAlert(options: {
+    header: string;
+  }): Promise<void> {
     if (this.platformService.isIos()) {
       return;
     }
     this.activeWriterAlert = await this.dialogService.showAlert({
-      header: 'Write',
+      header: options.header,
       message: 'Touch the NFC tag.',
       backdropDismiss: false,
       buttons: [
