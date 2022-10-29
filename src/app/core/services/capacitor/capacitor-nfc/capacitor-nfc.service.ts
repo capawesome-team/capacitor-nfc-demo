@@ -70,6 +70,14 @@ export class CapacitorNfcService {
     await Nfc.write(options);
   }
 
+  public async erase(): Promise<void> {
+    await Nfc.erase();
+  }
+
+  public async format(): Promise<void> {
+    await Nfc.format();
+  }
+
   public transceive(options: TransceiveOptions): Promise<TransceiveResult> {
     return Nfc.transceive(options);
   }
