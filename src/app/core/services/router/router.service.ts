@@ -15,6 +15,10 @@ export class RouterService {
     return this.router.navigate(['write']);
   }
 
+  public navigateToTransceivePage(): Promise<boolean> {
+    return this.router.navigate(['transceive']);
+  }
+
   public openAppStoreInNewTab(): void {
     // TODO: implement
     throw new Error('Not implemented.');

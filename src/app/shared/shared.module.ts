@@ -7,6 +7,7 @@ import {
   BooleanToTextPipe,
   BytesToHexPipe,
   BytesToTextPipe,
+  HexToBytesPipe,
   RecordLabelPipe,
   RecordPayloadPipe,
   TagManufacturerPipe,
@@ -27,6 +28,7 @@ const DECLARATIONS = [
   BooleanToTextPipe,
   BytesToHexPipe,
   BytesToTextPipe,
+  HexToBytesPipe,
   RecordLabelPipe,
   RecordPayloadPipe,
 ];

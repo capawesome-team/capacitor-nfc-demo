@@ -18,6 +18,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/write/write.module').then(m => m.WritePageModule),
   },
+  {
+    path: 'transceive',
+    loadChildren: () =>
+      import('./modules/transceive/transceive.module').then(
+        m => m.TransceivePageModule,
+      ),
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

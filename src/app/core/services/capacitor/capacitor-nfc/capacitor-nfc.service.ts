@@ -1,5 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Nfc, NfcTag, WriteOptions } from '@capawesome-team/capacitor-nfc';
+import {
+  Nfc,
+  NfcTag,
+  PollingOption,
+  TransceiveOptions,
+  TransceiveResult,
+  WriteOptions,
+} from '@capawesome-team/capacitor-nfc';
 import { Observable, Subject } from 'rxjs';
 import { PlatformService } from '../../platform/platform.service';
 
@@ -50,27 +57,9 @@ export class CapacitorNfcService {
   }
 
   public async startScanSession(): Promise<void> {
-    // this.scannedTagSubject.next({
-    //   id: [12, 45, 65, 70],
-    //   canMakeReadOnly: true,
-    //   isWritable: false,
-    //   maxSize: 4096,
-    //   ndefMessages: [
-    //     {
-    //       ndefRecords: [
-    //         {
-    //           id: [12, 45, 65, 70],
-    //           payload: [12, 45, 65, 70],
-    //           tnf: TypeNameFormat.MimeMedia,
-    //           type: [54],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   techTypes: [NfcTagTechType.NfcA, NfcTagTechType.NfcB],
-    //   type: NfcTagType.NfcForumType2,
-    // });
-    await Nfc.startScanSession({});
+    await Nfc.startScanSession({
+      pollingOptions: [PollingOption.iso14443, PollingOption.iso15693],
+    });
   }
 
   public async stopScanSession(): Promise<void> {
@@ -79,6 +68,10 @@ export class CapacitorNfcService {
 
   public async write(options: WriteOptions): Promise<void> {
     await Nfc.write(options);
+  }
+
+  public transceive(options: TransceiveOptions): Promise<TransceiveResult> {
+    return Nfc.transceive(options);
   }
 
   public async openSettings(): Promise<void> {
