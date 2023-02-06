@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { NfcUtils } from '@capawesome-team/capacitor-nfc';
 
 @Pipe({
   name: 'hexToBytes',
@@ -12,12 +13,11 @@ export class HexToBytesPipe implements PipeTransform {
     if (!hex || typeof hex !== 'string') {
       return [];
     }
-    hex = hex.replace(start, '');
-    hex = hex.split(separator).join('');
-    const bytes: number[] = [];
-    for (let i = 0; i < hex.length; i += 2) {
-      bytes.push(parseInt(hex.substr(i, 2), 16));
-    }
+    const { bytes } = new NfcUtils().convertHexToBytes({
+      hex,
+      start,
+      separator,
+    });
     return bytes;
   }
 }

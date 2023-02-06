@@ -1,5 +1,6 @@
 /* eslint-disable no-bitwise */
 import { Pipe, PipeTransform } from '@angular/core';
+import { NfcUtils } from '@capawesome-team/capacitor-nfc';
 
 @Pipe({
   name: 'bytesToHex',
@@ -13,13 +14,11 @@ export class BytesToHexPipe implements PipeTransform {
     if (!bytes || !Array.isArray(bytes)) {
       return '';
     }
-    const hexArray: string[] = [];
-    for (const byte of bytes) {
-      const hexItem = ('0' + (byte & 0xff).toString(16))
-        .slice(-2)
-        .toUpperCase();
-      hexArray.push(hexItem);
-    }
-    return start + hexArray.join(separator);
+    const { hex } = new NfcUtils().convertBytesToHex({
+      bytes,
+      start,
+      separator,
+    });
+    return hex;
   }
 }

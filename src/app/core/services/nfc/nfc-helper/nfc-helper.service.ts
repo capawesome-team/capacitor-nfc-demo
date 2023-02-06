@@ -8,6 +8,7 @@ import {
   NdefRecord,
   NfcUtils,
   RecordTypeDefinition,
+  UriIdentifierCode,
 } from '@capawesome-team/capacitor-nfc';
 
 @Injectable({
@@ -17,6 +18,14 @@ export class NfcHelperService {
   private readonly nfcUtilsInstance = new NfcUtils();
 
   constructor() {}
+
+  public convertStringToBytes(text: string): number[] {
+    return this.nfcUtilsInstance.convertStringToBytes({ text }).bytes;
+  }
+
+  public convertBytesToString(bytes: number[]): string {
+    return this.nfcUtilsInstance.convertBytesToString({ bytes }).text;
+  }
 
   public createNdefEmptyRecord(): NdefRecord {
     const { record } = this.nfcUtilsInstance.createNdefEmptyRecord();
@@ -55,11 +64,14 @@ export class NfcHelperService {
     return record;
   }
 
-  public getTextFromNdefTextRecord(record: NdefRecord): string | undefined {
-    const { text } = this.nfcUtilsInstance.getTextFromNdefTextRecord({
-      record,
-    });
-    return text;
+  public getIdentifierCodeFromNdefUriRecord(
+    record: NdefRecord,
+  ): UriIdentifierCode | undefined {
+    const { identifierCode } =
+      this.nfcUtilsInstance.getIdentifierCodeFromNdefUriRecord({
+        record,
+      });
+    return identifierCode;
   }
 
   public getLanguageFromNdefTextRecord(record: NdefRecord): string | undefined {
@@ -69,17 +81,38 @@ export class NfcHelperService {
     return language;
   }
 
+  public getTextFromNdefTextRecord(record: NdefRecord): string | undefined {
+    const { text } = this.nfcUtilsInstance.getTextFromNdefTextRecord({
+      record,
+    });
+    return text;
+  }
+
+  public getUriFromNdefUriRecord(record: NdefRecord): string | undefined {
+    const { uri } = this.nfcUtilsInstance.getUriFromNdefUriRecord({
+      record,
+    });
+    return uri;
+  }
+
   public mapBytesToRecordTypeDefinition(options: {
     bytes: number[];
   }): RecordTypeDefinition | undefined {
     return this.nfcUtilsInstance.mapBytesToRecordTypeDefinition(options).type;
   }
 
-  public convertStringToBytes(text: string): number[] {
-    return this.nfcUtilsInstance.convertStringToBytes({ text }).bytes;
-  }
-
-  public convertBytesToString(bytes: number[]): string {
-    return this.nfcUtilsInstance.convertBytesToString({ bytes }).text;
+  public mapUriIdentifierCodeToText(identifierCode: UriIdentifierCode): string {
+    switch (identifierCode) {
+      case UriIdentifierCode.HttpWww:
+        return 'http://www.';
+      case UriIdentifierCode.HttpsWww:
+        return 'https://www.';
+      case UriIdentifierCode.Http:
+        return 'http://';
+      case UriIdentifierCode.Https:
+        return 'https://';
+      default:
+        return '';
+    }
   }
 }

@@ -12,8 +12,28 @@
 <ion-content>
   <ion-list>
     <ion-item>
+      <ion-label position="stacked">Identifier Code</ion-label>
+      <ion-select
+        [placeholder]="'Http, Https, ...'"
+        [(ngModel)]="selectedIdentifierCode"
+      >
+        <ion-select-option [value]="identifierCode.HttpWww"
+          >http://www.</ion-select-option
+        >
+        <ion-select-option [value]="identifierCode.HttpsWww"
+          >https://www.</ion-select-option
+        >
+        <ion-select-option [value]="identifierCode.Http"
+          >http://</ion-select-option
+        >
+        <ion-select-option [value]="identifierCode.Https"
+          >https://</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Uri</ion-label>
-      <ion-input [(ngModel)]="uri" placeholder="https://"></ion-input>
+      <ion-input [(ngModel)]="uri" placeholder="capacitorjs.com"></ion-input>
     </ion-item>
   </ion-list>
   <ion-button expand="block" (click)="saveAndCloseModal()">Add</ion-button>

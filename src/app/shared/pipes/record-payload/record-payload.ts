@@ -4,6 +4,7 @@ import {
   NdefRecord,
   RecordTypeDefinition,
   TypeNameFormat,
+  UriIdentifierCode,
 } from '@capawesome-team/capacitor-nfc';
 
 @Pipe({
@@ -23,6 +24,15 @@ export class RecordPayloadPipe implements PipeTransform {
     switch (recordTypeDefinition) {
       case RecordTypeDefinition.Text:
         return this.nfcHelperService.getTextFromNdefTextRecord(record) || '';
+      case RecordTypeDefinition.Uri: {
+        const identifierCode =
+          this.nfcHelperService.getIdentifierCodeFromNdefUriRecord(record) ||
+          UriIdentifierCode.None;
+        const uri = this.nfcHelperService.getUriFromNdefUriRecord(record) || '';
+        return (
+          this.nfcHelperService.mapUriIdentifierCodeToText(identifierCode) + uri
+        );
+      }
       default:
         switch (record.tnf) {
           case TypeNameFormat.AbsoluteUri:
