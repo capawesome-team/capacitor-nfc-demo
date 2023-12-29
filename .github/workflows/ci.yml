@@ -14,6 +14,9 @@ on:
 env:
   NODE_VERSION: 20
   JAVA_VERSION: 17
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   build:
@@ -33,13 +36,11 @@ jobs:
       - name: Build web assets
         run: npm run build
       - name: Upload artifacts
-        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: www
           path: www
   android:
-    if: ${{ false }}
     name: Build Android platform
     runs-on: ubuntu-latest
     needs: [build]
@@ -55,15 +56,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Set npm access token for GitHub registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
-      - name: Install Node.js dependencies
-        run: npm ci
       - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: ${{ env.JAVA_VERSION }}
+      - name: Set npm access token for GitHub registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
+      - name: Install dependencies
+        run: npm ci
       - name: Copy web assets to native platform
         run: npx ionic capacitor copy android --no-build
       - name: Update native platform
@@ -72,7 +73,6 @@ jobs:
         working-directory: android
         run: ./gradlew build
   ios:
-    if: ${{ false }}
     name: Build iOS platform
     runs-on: macos-latest
     needs: [build]
@@ -124,9 +124,9 @@ jobs:
       - name: Run ESLint and Prettier
         run: npm run lint
   test:
-    if: ${{ false }}
     name: Test
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -134,15 +134,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: Set npm access token for GitHub registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
       - name: Install dependencies
         run: npm ci
       - name: Run unit tests
         run: npm run test:ci
   deploy:
-    if: github.ref == 'refs/heads/main'
-    name: Deploy to server
+    name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs: [build, lint]
+    needs: [build]
+    concurrency: deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -151,13 +153,22 @@ jobs:
         with:
           name: www
           path: www
-      - name: Copy files to server
-        uses: appleboy/scp-action@v0.1.1
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        id: vercel-deployment
         with:
-          host: ${{ secrets.DEPLOY_SSH_HOST }}
-          username: ${{ secrets.DEPLOY_SSH_USERNAME }}
-          password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
-          port: ${{ secrets.DEPLOY_SSH_PORT }}
-          source: www
-          target: ${{ secrets.DEPLOY_DIR }}
-          rm: true
+          vercel-token: ${{ env.VERCEL_TOKEN }}
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
+          scope: ${{ env.VERCEL_ORG_ID }}
+          working-directory: www
+      - name: Comment the preview url
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            Deploy preview available at: ${{ steps.vercel-deployment.outputs.preview-url }}
+
+            Built with commit ${{ github.event.pull_request.head.sha }}.
