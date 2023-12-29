@@ -29,7 +29,7 @@
     "@capacitor/ios": "5.0.0",
     "@capacitor/keyboard": "5.0.0",
     "@capacitor/status-bar": "5.0.0",
-    "@capawesome-team/capacitor-nfc": "5.0.2",
+    "@capawesome-team/capacitor-nfc": "5.0.2-dev.6780816.1703843206",
     "@ionic/angular": "6.1.12",
     "@ngneat/until-destroy": "9.2.1",
     "rxjs": "7.5.5",
