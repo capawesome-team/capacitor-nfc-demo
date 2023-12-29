@@ -18,51 +18,52 @@
                 (click)="openLegalPageInNewTab()"
                 [lines]="'none'"
                 >Legal</ion-item
-              >
-            </ion-list>
-          </ion-content>
-        </ng-template>
-      </ion-popover>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+                >
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Navigation</ion-label>
-    </ion-list-header>
-    <ion-button expand="block" color="primary" (click)="navigateToReadPage()"
-      >Read</ion-button
-    >
-    <ion-button expand="block" color="primary" (click)="navigateToWritePage()"
-      >Write</ion-button
-    >
-    <ion-button
-      *ngIf="isNativePlatform"
-      expand="block"
-      color="primary"
-      (click)="navigateToTransceivePage()"
-      >Transceive</ion-button
-    >
-    <ng-container *ngIf="!isNativePlatform">
+  <ion-content>
+    <ion-list>
       <ion-list-header>
-        <ion-label>Demo Apps</ion-label>
+        <ion-label>Navigation</ion-label>
       </ion-list-header>
-      <ion-button
-        expand="block"
-        class="app-store"
-        (click)="openAppStoreInNewTab()"
-      >
-        <ion-icon name="logo-apple"></ion-icon>&nbsp;App Store</ion-button
-      >
-      <ion-button
-        expand="block"
-        class="play-store"
-        (click)="openPlayStoreInNewTab()"
-        ><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play
-        Store</ion-button
-      >
-    </ng-container>
-  </ion-list>
-</ion-content>
+      <ion-button expand="block" color="primary" (click)="navigateToReadPage()"
+        >Read</ion-button
+        >
+        <ion-button expand="block" color="primary" (click)="navigateToWritePage()"
+          >Write</ion-button
+          >
+          @if (isNativePlatform) {
+            <ion-button
+              expand="block"
+              color="primary"
+              (click)="navigateToTransceivePage()"
+              >Transceive</ion-button
+              >
+            }
+            @if (!isNativePlatform) {
+              <ion-list-header>
+                <ion-label>Demo Apps</ion-label>
+              </ion-list-header>
+              <ion-button
+                expand="block"
+                class="app-store"
+                (click)="openAppStoreInNewTab()"
+                >
+                <ion-icon name="logo-apple"></ion-icon>&nbsp;App Store</ion-button
+                >
+                <ion-button
+                  expand="block"
+                  class="play-store"
+                  (click)="openPlayStoreInNewTab()"
+                  ><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play
+                  Store</ion-button
+                  >
+                }
+              </ion-list>
+            </ion-content>
