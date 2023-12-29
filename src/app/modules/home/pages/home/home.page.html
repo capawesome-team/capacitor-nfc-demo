@@ -53,13 +53,14 @@
         expand="block"
         class="app-store"
         (click)="openAppStoreInNewTab()"
-        ><fa-icon [icon]="['fab', 'apple']"></fa-icon>App Store</ion-button
+      >
+        <ion-icon name="logo-apple"></ion-icon>&nbsp;App Store</ion-button
       >
       <ion-button
         expand="block"
         class="play-store"
         (click)="openPlayStoreInNewTab()"
-        ><fa-icon [icon]="['fab', 'google-play']"></fa-icon> Play
+        ><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play
         Store</ion-button
       >
     </ng-container>

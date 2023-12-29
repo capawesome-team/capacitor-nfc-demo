@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { FaIconModule } from './components';
 import {
   BooleanToTextPipe,
   BytesToHexPipe,
@@ -14,13 +13,7 @@ import {
   TagNamePipe,
 } from './pipes';
 
-const MODULES = [
-  CommonModule,
-  FormsModule,
-  ReactiveFormsModule,
-  IonicModule,
-  FaIconModule,
-];
+const MODULES = [CommonModule, FormsModule, ReactiveFormsModule, IonicModule];
 
 const DECLARATIONS = [
   TagManufacturerPipe,
