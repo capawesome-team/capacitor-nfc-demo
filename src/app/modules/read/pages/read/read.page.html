@@ -9,12 +9,12 @@
 
 <ion-content>
   @if (scannedTag$ | async; as tag) {
-    <ion-list>
-      <ion-item-group>
-        <ion-item-divider>
-          <ion-label>Details</ion-label>
-        </ion-item-divider>
-        <!-- <ion-item lines="inset">
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Details</ion-label>
+      </ion-item-divider>
+      <!-- <ion-item lines="inset">
         <ion-label position="stacked">Tag Manufacturer</ion-label>
         <ion-input
           [readonly]="true"
@@ -26,54 +26,48 @@
         <ion-input [readonly]="true" [value]="tag | tagName"></ion-input>
       </ion-item> -->
       @if (tag.id !== undefined && tag.id.length > 0) {
-        <ion-item lines="inset">
-          <ion-label position="stacked">Tag Identifier</ion-label>
-          <ion-input
-            [readonly]="true"
-            [value]="tag.id | bytesToHex:'':':'"
-          ></ion-input>
-        </ion-item>
-      }
-      @if (tag.type !== undefined) {
-        <ion-item lines="inset">
-          <ion-label position="stacked">Tag Type</ion-label>
-          <ion-input [readonly]="true" [value]="tag.type"></ion-input>
-        </ion-item>
-      }
-      @if (tag.techTypes !== undefined && tag.techTypes.length > 0) {
-        <ion-item
-          lines="inset"
-          >
-          <ion-label position="stacked">Technologies</ion-label>
-          <ion-input
-            [readonly]="true"
-            [value]="tag.techTypes.join(', ')"
-          ></ion-input>
-        </ion-item>
-      }
-      @if (tag.isWritable !== undefined) {
-        <ion-item lines="inset">
-          <ion-label position="stacked">Writable</ion-label>
-          <ion-input
-            [readonly]="true"
-            [value]=" tag.isWritable | booleanToText"
-          ></ion-input>
-        </ion-item>
-      }
-      @if (tag.canMakeReadOnly !== undefined) {
-        <ion-item lines="inset">
-          <ion-label position="stacked">Write protectable</ion-label>
-          <ion-input
-            [readonly]="true"
-            [value]="tag.canMakeReadOnly | booleanToText"
-          ></ion-input>
-        </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="stacked">Tag Identifier</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.id | bytesToHex:'':':'"
+        ></ion-input>
+      </ion-item>
+      } @if (tag.type !== undefined) {
+      <ion-item lines="inset">
+        <ion-label position="stacked">Tag Type</ion-label>
+        <ion-input [readonly]="true" [value]="tag.type"></ion-input>
+      </ion-item>
+      } @if (tag.techTypes !== undefined && tag.techTypes.length > 0) {
+      <ion-item lines="inset">
+        <ion-label position="stacked">Technologies</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.techTypes.join(', ')"
+        ></ion-input>
+      </ion-item>
+      } @if (tag.isWritable !== undefined) {
+      <ion-item lines="inset">
+        <ion-label position="stacked">Writable</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]=" tag.isWritable | booleanToText"
+        ></ion-input>
+      </ion-item>
+      } @if (tag.canMakeReadOnly !== undefined) {
+      <ion-item lines="inset">
+        <ion-label position="stacked">Write protectable</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="tag.canMakeReadOnly | booleanToText"
+        ></ion-input>
+      </ion-item>
       }
       <!-- <ion-item lines="inset">
       <ion-label position="stacked">Password protected</ion-label>
       <ion-input [readonly]="true" [value]=""></ion-input>
     </ion-item> -->
-    @if (tag.maxSize !== undefined) {
+      @if (tag.maxSize !== undefined) {
       <ion-item lines="inset">
         <ion-label position="stacked">Size</ion-label>
         <ion-input
@@ -81,157 +75,124 @@
           [value]="tag.maxSize + ' Bytes'"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.atqa !== undefined && tag.atqa.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.atqa !== undefined && tag.atqa.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">ATQA</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.atqa | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.applicationData !== undefined && tag.applicationData.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.applicationData !== undefined && tag.applicationData.length >
+      0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Application Data</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.applicationData | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.barcode !== undefined && tag.barcode.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.barcode !== undefined && tag.barcode.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Barcode</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.barcode | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.dsfId !== undefined && tag.dsfId.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.dsfId !== undefined && tag.dsfId.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">DSF ID</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.dsfId | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.hiLayerResponse !== undefined && tag.hiLayerResponse.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.hiLayerResponse !== undefined && tag.hiLayerResponse.length >
+      0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Higher Layer Response</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.hiLayerResponse | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.historicalBytes !== undefined && tag.historicalBytes.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.historicalBytes !== undefined && tag.historicalBytes.length >
+      0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Historical Bytes</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.historicalBytes | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.manufacturer !== undefined && tag.manufacturer.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.manufacturer !== undefined && tag.manufacturer.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Manufacturer</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.manufacturer | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.protocolInfo !== undefined && tag.protocolInfo.length>0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.protocolInfo !== undefined && tag.protocolInfo.length>0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Protocol Info</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.protocolInfo | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.responseFlags !== undefined && tag.responseFlags.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.responseFlags !== undefined && tag.responseFlags.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Response Flag</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.responseFlags | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.responseFlags !== undefined && tag.responseFlags.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.responseFlags !== undefined && tag.responseFlags.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">Response Flag</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.responseFlags | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-    @if (tag.sak !== undefined && tag.sak.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.sak !== undefined && tag.sak.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">SAK</ion-label>
         <ion-input [readonly]="true" [value]="tag.sak | bytesToHex"></ion-input>
       </ion-item>
-    }
-    @if (tag.systemCode !== undefined && tag.systemCode.length > 0) {
-      <ion-item
-        lines="inset"
-        >
+      } @if (tag.systemCode !== undefined && tag.systemCode.length > 0) {
+      <ion-item lines="inset">
         <ion-label position="stacked">System Code</ion-label>
         <ion-input
           [readonly]="true"
           [value]="tag.systemCode | bytesToHex"
         ></ion-input>
       </ion-item>
-    }
-  </ion-item-group>
-  @if (tag.message) {
+      }
+    </ion-item-group>
+    @if (tag.message) {
     <ion-item-group>
       <ion-item-divider>
         <ion-label>Records</ion-label>
       </ion-item-divider>
       @for (record of tag.message.records; track record) {
-        <ion-item lines="inset">
-          <ion-label position="stacked">{{ record | recordLabel }}</ion-label>
-          <ion-input
-            [readonly]="true"
-            [value]="record | recordPayload"
-          ></ion-input>
-        </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="stacked">{{ record | recordLabel }}</ion-label>
+        <ion-input
+          [readonly]="true"
+          [value]="record | recordPayload"
+        ></ion-input>
+      </ion-item>
       }
     </ion-item-group>
-  }
-</ion-list>
-} @else {
+    }
+  </ion-list>
+  } @else {
   <div id="content-placeholder">
     <ion-icon name="radio-outline"></ion-icon>
   </div>
-}
+  }
 </ion-content>

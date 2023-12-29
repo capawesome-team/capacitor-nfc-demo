@@ -13,7 +13,7 @@
     <ion-select
       [placeholder]="'NfcA, NfcB, ...'"
       [(ngModel)]="selectedTechType"
-      >
+    >
       <ion-select-option [value]="techType.NfcA">NfcA</ion-select-option>
       <ion-select-option [value]="techType.NfcB">NfcB</ion-select-option>
       <ion-select-option [value]="techType.NfcF">NfcF</ion-select-option>
@@ -21,29 +21,29 @@
       <ion-select-option [value]="techType.IsoDep">IsoDep</ion-select-option>
       <ion-select-option [value]="techType.MifareClassic"
         >MifareClassic</ion-select-option
-        >
-        <ion-select-option [value]="techType.MifareUltralight"
-          >MifareUltralight</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Command</ion-label>
-        <ion-input
-          [placeholder]="'3C:00...'"
-          [(ngModel)]="selectedCommand"
-        ></ion-input>
-      </ion-item>
-      <ion-button
-        expand="block"
-        (click)="startWriterSession()"
-        [disabled]="!selectedTechType||!selectedCommand"
-        >Send command</ion-button
-        >
-        @if (transceiveResponse) {
-          <ion-item>
-            <ion-label position="stacked">Response</ion-label>
-            <ion-input [value]="transceiveResponse| bytesToHex:'':':'"></ion-input>
-          </ion-item>
-        }
-      </ion-content>
+      >
+      <ion-select-option [value]="techType.MifareUltralight"
+        >MifareUltralight</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Command</ion-label>
+    <ion-input
+      [placeholder]="'3C:00...'"
+      [(ngModel)]="selectedCommand"
+    ></ion-input>
+  </ion-item>
+  <ion-button
+    expand="block"
+    (click)="startWriterSession()"
+    [disabled]="!selectedTechType||!selectedCommand"
+    >Send command</ion-button
+  >
+  @if (transceiveResponse) {
+  <ion-item>
+    <ion-label position="stacked">Response</ion-label>
+    <ion-input [value]="transceiveResponse| bytesToHex:'':':'"></ion-input>
+  </ion-item>
+  }
+</ion-content>
