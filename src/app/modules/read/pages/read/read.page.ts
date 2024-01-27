@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NfcService, PlatformService } from '@app/core';
+import { NfcTag } from '@capawesome-team/capacitor-nfc';
 import { ViewDidEnter, ViewWillLeave } from '@ionic/angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -12,12 +14,21 @@ import { take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadPage implements ViewDidEnter, ViewWillLeave {
-  public scannedTag$ = this.nfcService.scannedTag$;
+  public scannedTag$: Observable<NfcTag>;
+
+  private showLastScannedTag = false;
 
   constructor(
     private readonly nfcService: NfcService,
     private readonly platformService: PlatformService,
-  ) {}
+    private readonly activatedRoute: ActivatedRoute,
+  ) {
+    this.showLastScannedTag =
+      this.activatedRoute.snapshot.queryParams.showLastScannedTag === 'true';
+    this.scannedTag$ = this.showLastScannedTag
+      ? this.nfcService.lastScannedTag$
+      : this.nfcService.scannedTag$;
+  }
 
   public ionViewDidEnter(): void {
     this.nfcService.startScanSession();
@@ -30,7 +41,7 @@ export class ReadPage implements ViewDidEnter, ViewWillLeave {
 
   private subscribeToObservables(): void {
     if (this.platformService.isIos()) {
-      this.nfcService.scannedTag$
+      this.scannedTag$
         .pipe(take(1), untilDestroyed(this))
         .subscribe(() => this.nfcService.stopScanSession());
     }

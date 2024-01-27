@@ -7,7 +7,7 @@ import {
   TransceiveResult,
   WriteOptions,
 } from '@capawesome-team/capacitor-nfc';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { PlatformService } from '../../platform/platform.service';
 
 @Injectable({
@@ -15,6 +15,7 @@ import { PlatformService } from '../../platform/platform.service';
 })
 export class CapacitorNfcService {
   private readonly scannedTagSubject = new Subject<NfcTag>();
+  private readonly lastScannedTagSubject = new ReplaySubject<NfcTag>(1);
   private readonly sessionCanceledSubject = new Subject<void>();
   private readonly sessionErrorSubject = new Subject<string>();
 
@@ -24,19 +25,17 @@ export class CapacitorNfcService {
   ) {
     Nfc.removeAllListeners().then(() => {
       Nfc.addListener('nfcTagScanned', event => {
-        console.log('nfcTagScanned', { event });
         this.ngZone.run(() => {
           this.scannedTagSubject.next(event.nfcTag);
+          this.lastScannedTagSubject.next(event.nfcTag);
         });
       });
       Nfc.addListener('scanSessionCanceled', () => {
-        console.log('scanSessionCanceled');
         this.ngZone.run(() => {
           this.sessionCanceledSubject.next();
         });
       });
       Nfc.addListener('scanSessionError', event => {
-        console.log('scanSessionError', { event });
         this.ngZone.run(() => {
           this.sessionErrorSubject.next(event.message);
         });
@@ -46,6 +45,10 @@ export class CapacitorNfcService {
 
   public get scannedTag$(): Observable<NfcTag> {
     return this.scannedTagSubject.asObservable();
+  }
+
+  public get lastScannedTag$(): Observable<NfcTag> {
+    return this.lastScannedTagSubject.asObservable();
   }
 
   public get sessionCanceled$(): Observable<void> {

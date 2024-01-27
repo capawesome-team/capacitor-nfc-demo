@@ -21,6 +21,10 @@ export class NfcService {
     return this.capacitorNfcService.scannedTag$;
   }
 
+  public get lastScannedTag$(): Observable<NfcTag> {
+    return this.capacitorNfcService.lastScannedTag$;
+  }
+
   public async startScanSession(): Promise<void> {
     const isSupported = await this.isSupported();
     if (!isSupported) {

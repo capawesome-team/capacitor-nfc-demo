@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DialogService, PlatformService, RouterService } from '@app/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  DialogService,
+  NfcService,
+  PlatformService,
+  RouterService,
+} from '@app/core';
+import { ViewDidEnter, ViewDidLeave } from '@ionic/angular';
+import { skipWhile } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +14,35 @@ import { DialogService, PlatformService, RouterService } from '@app/core';
   styleUrls: ['./home.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage {
+export class HomePage implements OnInit, ViewDidEnter, ViewDidLeave {
   public readonly isNativePlatform = this.platformService.isNativePlatform();
+
+  private viewDidLeave = false;
 
   constructor(
     private readonly routerService: RouterService,
     private readonly platformService: PlatformService,
     private readonly dialogService: DialogService,
+    private readonly nfcService: NfcService,
   ) {}
+
+  public ngOnInit(): void {
+    this.nfcService.lastScannedTag$
+      .pipe(skipWhile(() => this.viewDidLeave))
+      .subscribe(() => {
+        void this.routerService.navigateToReadPage({
+          showLastScannedTag: true,
+        });
+      });
+  }
+
+  public ionViewDidEnter(): void {
+    this.viewDidLeave = false;
+  }
+
+  public ionViewDidLeave(): void {
+    this.viewDidLeave = true;
+  }
 
   public async navigateToReadPage(): Promise<void> {
     await this.routerService.navigateToReadPage();

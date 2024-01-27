@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +7,14 @@ import { Router } from '@angular/router';
 export class RouterService {
   constructor(private readonly router: Router) {}
 
-  public navigateToReadPage(): Promise<boolean> {
-    return this.router.navigate(['read']);
+  public navigateToReadPage(options?: {
+    showLastScannedTag?: boolean;
+  }): Promise<boolean> {
+    let extras: NavigationExtras = {};
+    if (options?.showLastScannedTag) {
+      extras.queryParams = { showLastScannedTag: 'true' };
+    }
+    return this.router.navigate(['read'], extras);
   }
 
   public navigateToWritePage(): Promise<boolean> {
