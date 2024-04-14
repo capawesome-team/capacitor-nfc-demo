@@ -141,10 +141,9 @@ jobs:
       - name: Run unit tests
         run: npm run test:ci
   deploy:
-    name: Deploy to Vercel
+    name: Deploy to Cloudflare Pages
     runs-on: ubuntu-latest
     needs: [build]
-    concurrency: deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -153,22 +152,20 @@ jobs:
         with:
           name: www
           path: www
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        id: vercel-deployment
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        id: cloudflare-deployment
         with:
-          vercel-token: ${{ env.VERCEL_TOKEN }}
-          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
-          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
-          scope: ${{ env.VERCEL_ORG_ID }}
-          working-directory: www
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          directory: www
       - name: Comment the preview url
         if: github.event_name == 'pull_request'
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            Deploy preview available at: ${{ steps.vercel-deployment.outputs.preview-url }}
+            Deploy preview available at: ${{ steps.cloudflare-deployment.outputs.url }}
 
             Built with commit ${{ github.event.pull_request.head.sha }}.
