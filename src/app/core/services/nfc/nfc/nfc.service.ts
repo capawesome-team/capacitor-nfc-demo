@@ -25,6 +25,24 @@ export class NfcService {
     return this.capacitorNfcService.lastScannedTag$;
   }
 
+  public async close(): Promise<void> {
+    await this.capacitorNfcService.close();
+  }
+
+  public async connect(techType: NfcTagTechType): Promise<void> {
+    const isSupported = await this.isSupported();
+    if (!isSupported) {
+      throw this.createNotSupportedError();
+    }
+    const isEnabled = await this.isEnabled();
+    if (!isEnabled) {
+      throw this.createNotEnabledError();
+    }
+    await this.capacitorNfcService.connect({
+      techType,
+    });
+  }
+
   public async startScanSession(): Promise<void> {
     const isSupported = await this.isSupported();
     if (!isSupported) {

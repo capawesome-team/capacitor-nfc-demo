@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  ConnectOptions,
   Nfc,
   NfcTag,
   PollingOption,
@@ -59,6 +60,20 @@ export class CapacitorNfcService {
     return this.sessionErrorSubject.asObservable();
   }
 
+  public async close(): Promise<void> {
+    const isAndroid = this.platformService.isAndroid();
+    if (isAndroid) {
+      await Nfc.close();
+    }
+  }
+
+  public async connect(options: ConnectOptions): Promise<void> {
+    const isAndroid = this.platformService.isAndroid();
+    if (isAndroid) {
+      await Nfc.connect(options);
+    }
+  }
+
   public async startScanSession(): Promise<void> {
     await Nfc.startScanSession({
       pollingOptions: [PollingOption.iso14443, PollingOption.iso15693],
@@ -95,7 +110,8 @@ export class CapacitorNfcService {
   }
 
   public async isEnabled(): Promise<boolean> {
-    if (!this.platformService.isAndroid()) {
+    const isAndroid = this.platformService.isAndroid();
+    if (!isAndroid) {
       return true;
     }
     const { isEnabled } = await Nfc.isEnabled();

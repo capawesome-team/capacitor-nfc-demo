@@ -71,10 +71,12 @@ export class TransceivePage {
           '',
           ':',
         );
+        await this.nfcService.connect(this.selectedTechType);
         this.transceiveResponse = await this.nfcService.transceive(
           this.selectedTechType,
           data,
         );
+        await this.nfcService.close();
         this.changeDetectorRef.detectChanges();
         this.activeWriterAlert?.dismiss();
         await this.nfcService.stopScanSession();
