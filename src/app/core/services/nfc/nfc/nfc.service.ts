@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  Iso15693RequestFlag,
   NdefMessage,
   NfcTag,
   NfcTagTechType,
@@ -108,6 +109,8 @@ export class NfcService {
   public async transceive(
     techType: NfcTagTechType,
     data: number[],
+    iso15693RequestFlags?: Iso15693RequestFlag[],
+    iso15693CommandCode?: number,
   ): Promise<number[]> {
     const isSupported = await this.isSupported();
     if (!isSupported) {
@@ -120,6 +123,8 @@ export class NfcService {
     const { response } = await this.capacitorNfcService.transceive({
       techType,
       data,
+      iso15693CommandCode,
+      iso15693RequestFlags,
     });
     return response;
   }

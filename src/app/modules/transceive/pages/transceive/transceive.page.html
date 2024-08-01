@@ -34,6 +34,46 @@
       [(ngModel)]="selectedCommand"
     ></ion-input>
   </ion-item>
+  @if (isIos && selectedTechType === techType.NfcV) {
+  <ion-item>
+    <ion-label position="stacked">ISO 15693 Request Flags</ion-label>
+    <ion-select
+      [placeholder]="'Address, CommandSpecificBit8, ...'"
+      [(ngModel)]="selectedIso15693RequestFlags"
+      [multiple]="true"
+    >
+      <ion-select-option [value]="iso15693RequestFlag.address"
+        >Address</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.commandSpecificBit8"
+        >CommandSpecificBit8</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.dualSubCarriers"
+        >DualSubCarriers</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.highDataRate"
+        >HighDataRate</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.option"
+        >Option</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.protocolExtension"
+        >ProtocolExtension</ion-select-option
+      >
+      <ion-select-option [value]="iso15693RequestFlag.select"
+        >Select</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">ISO 15693 Command Code</ion-label>
+    <ion-input
+      type="number"
+      [placeholder]="'160'"
+      [(ngModel)]="selectedIso15693CommandCode"
+    ></ion-input>
+  </ion-item>
+  }
   <ion-button
     expand="block"
     (click)="startWriterSession()"

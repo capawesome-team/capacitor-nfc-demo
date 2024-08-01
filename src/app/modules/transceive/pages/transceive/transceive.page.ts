@@ -10,7 +10,10 @@ import {
   TimeoutService,
 } from '@app/core';
 import { HexToBytesPipe } from '@app/shared/pipes';
-import { NfcTagTechType } from '@capawesome-team/capacitor-nfc';
+import {
+  Iso15693RequestFlag,
+  NfcTagTechType,
+} from '@capawesome-team/capacitor-nfc';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subject, take, takeUntil } from 'rxjs';
 
@@ -23,10 +26,15 @@ import { Subject, take, takeUntil } from 'rxjs';
   providers: [HexToBytesPipe],
 })
 export class TransceivePage {
+  public readonly isAndroid = this.platformService.isAndroid();
+  public readonly isIos = this.platformService.isIos();
+  public readonly iso15693RequestFlag = Iso15693RequestFlag;
   public readonly techType = NfcTagTechType;
 
-  public selectedTechType: NfcTagTechType | undefined;
   public selectedCommand: string | undefined;
+  public selectedIso15693RequestFlags: Iso15693RequestFlag[] | undefined;
+  public selectedIso15693CommandCode: number | undefined;
+  public selectedTechType: NfcTagTechType | undefined;
   public transceiveResponse: number[] | undefined;
 
   private readonly cancelSubject = new Subject<void>();
@@ -75,6 +83,8 @@ export class TransceivePage {
         this.transceiveResponse = await this.nfcService.transceive(
           this.selectedTechType,
           data,
+          this.selectedIso15693RequestFlags,
+          this.selectedIso15693CommandCode,
         );
         await this.nfcService.close();
         this.changeDetectorRef.detectChanges();
