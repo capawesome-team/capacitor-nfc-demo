@@ -21,7 +21,7 @@ The following plugins are included:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/pkglab/capacitor-nfc-demo.git
+$ git clone https://github.com/capawesome-team/capacitor-nfc-demo.git
 
 # Change to the root directory of the project
 $ cd capacitor-nfc-demo
