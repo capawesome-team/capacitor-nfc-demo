@@ -6,7 +6,6 @@ import {
   RouterService,
 } from '@app/core';
 import { ViewDidEnter, ViewDidLeave } from '@ionic/angular';
-import { skipWhile } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -27,13 +26,14 @@ export class HomePage implements OnInit, ViewDidEnter, ViewDidLeave {
   ) {}
 
   public ngOnInit(): void {
-    this.nfcService.lastScannedTag$
-      .pipe(skipWhile(() => this.viewDidLeave))
-      .subscribe(() => {
-        void this.routerService.navigateToReadPage({
-          showLastScannedTag: true,
-        });
+    this.nfcService.lastScannedTag$.subscribe(() => {
+      if (this.viewDidLeave) {
+        return;
+      }
+      void this.routerService.navigateToReadPage({
+        showLastScannedTag: true,
       });
+    });
   }
 
   public ionViewDidEnter(): void {
