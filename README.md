@@ -6,7 +6,7 @@
 
 The following plugins are included:
 
-- [capawesome-team/capacitor-nfc](https://github.com/capawesome-team/capacitor-nfc)
+- [capawesome-team/capacitor-nfc](https://capawesome.io/plugins/nfc/)
 
 ## Development 💻
 
