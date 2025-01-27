@@ -8,7 +8,6 @@
 		"HapticsPlugin",
 		"KeyboardPlugin",
 		"StatusBarPlugin",
-		"NfcPlugin",
 		"NfcPlugin"
 	]
 }
