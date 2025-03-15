@@ -10,7 +10,7 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (7.0.0):
     - Capacitor
-  - CapawesomeTeamCapacitorNfc (6.5.1-dev.8e68386.1738002535):
+  - CapawesomeTeamCapacitorNfc (7.0.2):
     - Capacitor
 
 DEPENDENCIES:
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   CapacitorHaptics: 7be406a91e4eb87287f321c6c68e1709d6837b3a
   CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
   CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
-  CapawesomeTeamCapacitorNfc: fa4faf8e7d09de02ea432b28b234a4465d3650df
+  CapawesomeTeamCapacitorNfc: 4db1dc2741d2be24f03d05c2d3d7f196e8a13699
 
 PODFILE CHECKSUM: 8ca820c5b8eeadf344044dff34518bddf81543b9
 
