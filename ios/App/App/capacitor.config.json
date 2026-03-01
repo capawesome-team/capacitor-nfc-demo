@@ -1,8 +1,7 @@
 {
 	"appId": "dev.robingenz.capacitorjs.nfc.demo",
 	"appName": "capacitor-nfc-demo",
-	"webDir": "www",
-	"bundledWebRuntime": false,
+	"webDir": "www/browser",
 	"packageClassList": [
 		"AppPlugin",
 		"HapticsPlugin",
