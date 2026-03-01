@@ -8,6 +8,7 @@ import {
 } from '@capawesome-team/capacitor-nfc';
 
 @Pipe({
+  standalone: false,
   name: 'recordPayload',
 })
 export class RecordPayloadPipe implements PipeTransform {

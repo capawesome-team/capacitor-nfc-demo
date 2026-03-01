@@ -12,6 +12,7 @@ import { CreateNdefTextRecordModalComponent } from '../create-ndef-text-record-m
 import { CreateNdefUriRecordModalComponent } from '../create-ndef-uri-record-modal/create-ndef-uri-record-modal.component';
 
 @Component({
+  standalone: false,
   selector: 'app-create-ndef-record-modal',
   templateUrl: './create-ndef-record-modal.component.html',
   styleUrls: ['./create-ndef-record-modal.component.scss'],

@@ -3,6 +3,7 @@ import { Constants } from '@app/config';
 import { DialogService, NdefRecordsService, NfcHelperService } from '@app/core';
 
 @Component({
+  standalone: false,
   selector: 'app-create-ndef-mime-media-record-modal',
   templateUrl: './create-ndef-mime-media-record-modal.component.html',
   styleUrls: ['./create-ndef-mime-media-record-modal.component.scss'],

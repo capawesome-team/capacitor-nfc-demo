@@ -18,6 +18,7 @@ import { CreateNdefRecordModalComponent } from '../../components';
 
 @UntilDestroy()
 @Component({
+  standalone: false,
   selector: 'app-write',
   templateUrl: './write.page.html',
   styleUrls: ['./write.page.scss'],

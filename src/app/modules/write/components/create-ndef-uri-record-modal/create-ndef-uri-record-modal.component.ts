@@ -4,6 +4,7 @@ import { DialogService, NdefRecordsService, NfcHelperService } from '@app/core';
 import { UriIdentifierCode } from '@capawesome-team/capacitor-nfc';
 
 @Component({
+  standalone: false,
   selector: 'app-create-ndef-uri-record-modal',
   templateUrl: './create-ndef-uri-record-modal.component.html',
   styleUrls: ['./create-ndef-uri-record-modal.component.scss'],

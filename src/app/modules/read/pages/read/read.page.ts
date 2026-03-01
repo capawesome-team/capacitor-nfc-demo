@@ -8,6 +8,7 @@ import { Observable, take } from 'rxjs';
 
 @UntilDestroy()
 @Component({
+  standalone: false,
   selector: 'app-read',
   templateUrl: './read.page.html',
   styleUrls: ['./read.page.scss'],

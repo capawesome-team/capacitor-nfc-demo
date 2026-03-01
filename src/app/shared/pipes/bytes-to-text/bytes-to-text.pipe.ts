@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { NfcHelperService } from '@app/core';
 
 @Pipe({
+  standalone: false,
   name: 'bytesToText',
 })
 export class BytesToTextPipe implements PipeTransform {

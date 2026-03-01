@@ -8,6 +8,7 @@ import {
 import { ViewDidEnter, ViewDidLeave } from '@ionic/angular';
 
 @Component({
+  standalone: false,
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],

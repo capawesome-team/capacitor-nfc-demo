@@ -3,6 +3,7 @@ import { Constants } from '@app/config';
 import { DialogService, NdefRecordsService, NfcHelperService } from '@app/core';
 
 @Component({
+  standalone: false,
   selector: 'app-create-ndef-absolute-uri-record-modal',
   templateUrl: './create-ndef-absolute-uri-record-modal.component.html',
   styleUrls: ['./create-ndef-absolute-uri-record-modal.component.scss'],

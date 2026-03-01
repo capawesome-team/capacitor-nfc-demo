@@ -19,6 +19,7 @@ import { Subject, take, takeUntil } from 'rxjs';
 
 @UntilDestroy()
 @Component({
+  standalone: false,
   selector: 'app-transceive',
   templateUrl: './transceive.page.html',
   styleUrls: ['./transceive.page.scss'],

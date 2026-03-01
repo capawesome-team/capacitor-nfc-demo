@@ -3,6 +3,7 @@ import { Constants } from '@app/config';
 import { DialogService, NdefRecordsService, NfcHelperService } from '@app/core';
 
 @Component({
+  standalone: false,
   selector: 'app-create-ndef-android-application-record-modal',
   templateUrl: './create-ndef-android-application-record-modal.component.html',
   styleUrls: ['./create-ndef-android-application-record-modal.component.scss'],

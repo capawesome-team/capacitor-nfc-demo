@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { NfcUtils } from '@capawesome-team/capacitor-nfc';
 
 @Pipe({
+  standalone: false,
   name: 'bytesToHex',
 })
 export class BytesToHexPipe implements PipeTransform {
