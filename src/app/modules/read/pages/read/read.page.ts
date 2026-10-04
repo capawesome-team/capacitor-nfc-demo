@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NfcService, PlatformService } from '@app/core';
 import { NfcTag } from '@capawesome-team/capacitor-nfc';
-import { ViewDidEnter, ViewWillLeave } from '@ionic/angular';
+import { ViewDidEnter, ViewWillLeave } from '@ionic/angular/lazy';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, take } from 'rxjs';
 

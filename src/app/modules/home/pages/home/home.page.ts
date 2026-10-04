@@ -5,7 +5,7 @@ import {
   PlatformService,
   RouterService,
 } from '@app/core';
-import { ViewDidEnter, ViewDidLeave } from '@ionic/angular';
+import { ViewDidEnter, ViewDidLeave } from '@ionic/angular/lazy';
 
 @Component({
   standalone: false,

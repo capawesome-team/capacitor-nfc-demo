@@ -1,16 +1,16 @@
 PODS:
-  - Capacitor (8.1.0):
+  - Capacitor (8.5.2):
     - CapacitorCordova
-  - CapacitorApp (8.0.1):
+  - CapacitorApp (8.1.2):
     - Capacitor
-  - CapacitorCordova (8.1.0)
-  - CapacitorHaptics (8.0.1):
+  - CapacitorCordova (8.5.2)
+  - CapacitorHaptics (8.0.2):
     - Capacitor
-  - CapacitorKeyboard (8.0.1):
+  - CapacitorKeyboard (8.0.6):
     - Capacitor
-  - CapacitorStatusBar (8.0.1):
+  - CapacitorStatusBar (8.0.4):
     - Capacitor
-  - CapawesomeTeamCapacitorNfc (8.0.1):
+  - CapawesomeTeamCapacitorNfc (8.1.5):
     - Capacitor
 
 DEPENDENCIES:
@@ -39,14 +39,14 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capawesome-team/capacitor-nfc"
 
 SPEC CHECKSUMS:
-  Capacitor: 47b825120c6b8b6d6f9f053e9350a8960d436710
-  CapacitorApp: 942306cd1acf7774a00e89a3986af3a67c8cad7a
-  CapacitorCordova: e8b76fd95fc1e157775abc484c59cc0de464095d
-  CapacitorHaptics: 4df2c625445cef39b67ea635a21802bc92df3b82
-  CapacitorKeyboard: 867eb4b3c901d9bb5c3d0c93b546185d52484e19
-  CapacitorStatusBar: 32206abd53b14f339763da26f71286deaa891e16
-  CapawesomeTeamCapacitorNfc: 707034c3aeace18fca0516b05043d7483fba4f23
+  Capacitor: 89067779e14fb7ea56af07b4817f45d1f0c2a269
+  CapacitorApp: 7b7e43debe505bc61beedb83796aa1368c86078b
+  CapacitorCordova: 5bec5648cbd09a176ce34ce5e7b6cdabb2c8a327
+  CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
+  CapacitorKeyboard: f9e85e685082e9f63404de15db4a4291448b0912
+  CapacitorStatusBar: ff844df1f126da6c4fbc4028272425fa3a91e7e3
+  CapawesomeTeamCapacitorNfc: 523a1c3292cab3a79378605137729f406e4aa620
 
 PODFILE CHECKSUM: cd05aff920b40c0610b51947374f0e4a0f2fce5a
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0
