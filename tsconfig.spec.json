@@ -8,10 +8,10 @@
     ],
     "paths": {
       "@app/*": [
-        "src/app/*"
+        "./src/app/*"
       ],
       "@env/*": [
-        "src/environments/*"
+        "./src/environments/*"
       ]
     }
   },
@@ -22,5 +22,13 @@
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

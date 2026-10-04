@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import { Pipe, PipeTransform } from '@angular/core';
 import { NfcUtils } from '@capawesome-team/capacitor-nfc';
 

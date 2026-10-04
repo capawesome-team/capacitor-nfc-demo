@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Constants } from '@app/config';
 import { DialogService, NdefRecordsService, NfcHelperService } from '@app/core';
-// eslint-disable-next-line max-len
 import { CreateNdefAbsoluteUriRecordModalComponent } from '../create-ndef-absolute-uri-record-modal/create-ndef-absolute-uri-record-modal.component';
-// eslint-disable-next-line max-len
 import { CreateNdefAndroidApplicationRecordModalComponent } from '../create-ndef-android-application-record-modal/create-ndef-android-application-record-modal.component';
 import { CreateNdefExternalRecordModalComponent } from '../create-ndef-external-record-modal/create-ndef-external-record-modal.component';
-// eslint-disable-next-line max-len
 import { CreateNdefMimeMediaRecordModalComponent } from '../create-ndef-mime-media-record-modal/create-ndef-mime-media-record-modal.component';
 import { CreateNdefTextRecordModalComponent } from '../create-ndef-text-record-modal/create-ndef-text-record-modal.component';
 import { CreateNdefUriRecordModalComponent } from '../create-ndef-uri-record-modal/create-ndef-uri-record-modal.component';
