@@ -71,7 +71,7 @@ jobs:
         run: ./gradlew build
   ios:
     name: Build iOS platform
-    runs-on: macos-14
+    runs-on: macos-26
     needs: [build]
     steps:
       - name: Checkout
@@ -98,6 +98,7 @@ jobs:
         run: xcodebuild
           -project App/App.xcodeproj
           -scheme App
+          -destination 'generic/platform=iOS'
           -archivePath App/build/App.xarchive
           clean build archive
           CODE_SIGN_IDENTITY=""
